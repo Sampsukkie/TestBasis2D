@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        
+        SettingsPage.SetActive(false);
     }
 
     void Update()
@@ -41,13 +41,10 @@ public class MenuController : MonoBehaviour
     void ChangeToGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        Debug.Log("Testi1");
     }
 
     void CloseMenuScene()
     {
         Application.Quit();
-        Debug.Log("Testi2");
     }
 }
