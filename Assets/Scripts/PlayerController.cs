@@ -15,9 +15,13 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer playerSprite;
 
+    private ShakeController shake;
+
     void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
+
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<ShakeController>();
     }
 
     void Update()
@@ -60,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Enemy"))
         {
-
+            shake.CamShake();
         }
     }
 }
