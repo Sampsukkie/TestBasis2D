@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,16 +14,21 @@ public class PlayerController : MonoBehaviour
 
     private bool isWalking;
     private bool isFlipped;
+    private bool isOnGround;
 
     private SpriteRenderer playerSprite;
 
     private ShakeController shake;
+
+    private Rigidbody2D rb;
 
     void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
 
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<ShakeController>();
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -44,6 +51,11 @@ public class PlayerController : MonoBehaviour
             playerSprite.flipX = false;
             isFlipped = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.W) && isOnGround)
+        {
+            rb.AddForce(Vector2.up * 1500);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -55,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
             if (Collectibles == 4)
             {
-
+                GoToWinScene();
             }
         }
     }
@@ -64,7 +76,30 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Enemy"))
         {
-            shake.CamShake();
+            CameraShake();
         }
+
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collider)
+    {
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = false;
+        }
+    }
+
+    public void CameraShake()
+    {
+        shake.CamShake();
+    }
+
+    public void GoToWinScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
