@@ -8,18 +8,18 @@ public class PlayerController : MonoBehaviour
 
     public float MovingSpeed = 1f;
 
+    public int Collectibles;
+
     private bool isWalking;
     private bool isFlipped;
 
     private SpriteRenderer playerSprite;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float movingDirection = Input.GetAxisRaw("Horizontal");
@@ -39,6 +39,28 @@ public class PlayerController : MonoBehaviour
         {
             playerSprite.flipX = false;
             isFlipped = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            Collectibles++;
+            Destroy(other.gameObject);
+
+            if (Collectibles == 4)
+            {
+
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
+
         }
     }
 }
