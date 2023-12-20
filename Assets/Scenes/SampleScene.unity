@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1430883480}
+  followTime: 0.1
 --- !u!4 &161966415
 Transform:
   m_ObjectHideFlags: 0

@@ -5,8 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject Player;
+    public float followTime = 1f;
 
     private Vector3 offset;
+    private Vector3 velocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = Player.transform.position + offset;
+        Vector3 targetPosition = Player.transform.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, followTime);
     }
 }
