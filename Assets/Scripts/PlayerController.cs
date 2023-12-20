@@ -10,11 +10,15 @@ public class PlayerController : MonoBehaviour
 
     public float MovingSpeed = 1f;
 
+    public GameObject Apple;
+
     public int Collectibles;
 
     private bool isWalking;
     private bool isFlipped;
     private bool isOnGround;
+    private bool isInPickable;
+    private bool isCarryingApple;
 
     private SpriteRenderer playerSprite;
 
@@ -56,6 +60,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * 1500);
         }
+
+        if (Input.GetKeyDown(KeyCode.S) && isInPickable)
+        {
+            Apple.SetActive(false);
+            isCarryingApple = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -70,6 +80,19 @@ public class PlayerController : MonoBehaviour
                 GoToWinScene();
             }
         }
+
+        if (other.gameObject.CompareTag("Pickable"))
+        {
+            isInPickable = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Pickable"))
+        {
+            isInPickable = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
@@ -83,6 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collider)
