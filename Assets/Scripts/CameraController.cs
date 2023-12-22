@@ -10,13 +10,11 @@ public class CameraController : MonoBehaviour
     private Vector3 offset;
     private Vector3 velocity = Vector3.zero;
 
-    // Start is called before the first frame update
     void Start()
     {
         offset = transform.position - Player.transform.position;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         Vector3 targetPosition = Player.transform.position + offset;
