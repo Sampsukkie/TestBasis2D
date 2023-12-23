@@ -15,6 +15,8 @@ public class TopDownEnemyController : MonoBehaviour
 
     public Vector3 direction; //"dir"
 
+    private Animator enemyNator;
+
     private Rigidbody2D rb;
 
     private Vector2 movement;
@@ -25,11 +27,13 @@ public class TopDownEnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-
+        enemyNator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        enemyNator.SetBool("isMoving", isPlayerInRange);
+
         isPlayerInRange = Physics2D.OverlapCircle(transform.position, Radius, L_Player);
 
         direction = Player.transform.position - transform.position;
@@ -39,7 +43,8 @@ public class TopDownEnemyController : MonoBehaviour
 
         if (IsOnRotate)
         {
-
+            enemyNator.SetFloat("X", direction.x);
+            enemyNator.SetFloat("Y", direction.y);
         }
     }
 
