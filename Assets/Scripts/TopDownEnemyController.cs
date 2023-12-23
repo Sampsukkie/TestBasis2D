@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class TopDownEnemyController : MonoBehaviour
 {
-    public bool IsOnRotate; //"ShouldRotate"
+    public bool IsOnRotate; 
 
-    public float EnemySpeed; //"Speed"
-    public float Radius; //"CheckRadius"
+    public float EnemySpeed; 
+    public float Radius; 
 
-    public GameObject Player; //"Target"
+    public GameObject Player; 
 
-    public LayerMask L_Player; //"WhatIsPlayer"
+    public LayerMask L_Player; 
 
-    public Vector3 direction; //"dir"
+    public Vector3 direction; 
 
     private Animator enemyNator;
 
@@ -21,7 +21,7 @@ public class TopDownEnemyController : MonoBehaviour
 
     private Vector2 movement;
 
-    private bool isPlayerInRange; //"isInChaseRange"
+    private bool isPlayerInRange; 
 
     void Start()
     {
