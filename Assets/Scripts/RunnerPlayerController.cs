@@ -6,6 +6,8 @@ public class RunnerPlayerController : MonoBehaviour
 {
     public float PlayerSpeed;
 
+    private bool isAbleMove;
+
     private float boostTempo = 5f;
     private float nextBoost;
 
@@ -19,7 +21,12 @@ public class RunnerPlayerController : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity.magnitude < PlayerSpeed)
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            isAbleMove = true;
+        }
+
+        if (rb.velocity.magnitude < PlayerSpeed && isAbleMove)
         {
             rb.AddForce(Vector3.right * PlayerSpeed);
         }
@@ -30,6 +37,14 @@ public class RunnerPlayerController : MonoBehaviour
 
             rb.AddForce(Vector3.left * 3000f);
             rb.AddForce(Vector3.up * 1500f);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.CompareTag("Stopper"))
+        {
+            isAbleMove = false;
         }
     }
 }
