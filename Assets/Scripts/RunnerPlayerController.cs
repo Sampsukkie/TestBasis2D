@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class RunnerPlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float PlayerSpeed;
+
+    private float boostTempo = 5f;
+    private float nextBoost;
+
+    private Rigidbody2D rb;
+
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (rb.velocity.magnitude < PlayerSpeed)
+        {
+            rb.AddForce(Vector3.right * PlayerSpeed);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextBoost)
+        {
+            nextBoost = Time.time + boostTempo;
+
+            rb.AddForce(Vector3.left * 3000f);
+            rb.AddForce(Vector3.up * 1500f);
+        }
     }
 }
