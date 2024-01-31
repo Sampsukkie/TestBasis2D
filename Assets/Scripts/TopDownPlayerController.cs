@@ -13,7 +13,7 @@ public class TopDownPlayerController : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
