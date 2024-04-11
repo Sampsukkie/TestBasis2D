@@ -12,7 +12,7 @@ public class RunnerPlayerController : MonoBehaviour
     public GameObject W1;
     public GameObject W2;
 
-    private bool isAbleMove;
+    private bool isAbleMove = true;
     private bool isW1;
 
     private float boostTempo = 5f;
